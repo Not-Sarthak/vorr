@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useWalletStore } from "@/store/walletStore";
 
 interface LightDropdownProps {
   title: string;
@@ -9,10 +10,24 @@ interface LightDropdownProps {
 }
 
 export default function LightDropdown({ title, options }: LightDropdownProps) {
+  const setWalletConnected = useWalletStore(
+    (state) => state.setWalletConnected
+  );
+  const setPublicKey = useWalletStore((state) => state.setPublicKey);
+  const setSignedIn = useWalletStore((state) => state.setIsSignedIn);
+
+  // const { disconnect } = useWallet();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleSignOut = async () => {
+    // await disconnect();
+    setWalletConnected(false);
+    setPublicKey("");
+    setSignedIn(false);
   };
 
   return (
@@ -23,7 +38,11 @@ export default function LightDropdown({ title, options }: LightDropdownProps) {
       >
         {title}
         <Image
-          src={isOpen ? "/dashboard/upward-arrow.svg" : "/dashboard/downward_arrow.svg"}
+          src={
+            isOpen
+              ? "/dashboard/upward-arrow.svg"
+              : "/dashboard/downward_arrow.svg"
+          }
           alt={isOpen ? "Upward Arrow" : "Downward Arrow"}
           width="9"
           height="9"
@@ -43,6 +62,7 @@ export default function LightDropdown({ title, options }: LightDropdownProps) {
               <a
                 key={index}
                 href="#"
+                onClick={option === "Sign Out" ? handleSignOut : undefined}
                 className="block px-4 py-2 text-sm text-[#00000] hover:bg-gray-700 rounded-lg"
               >
                 {option}

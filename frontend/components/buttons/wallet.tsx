@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect } from "react";
 import {
   ConnectionProvider,
   WalletProvider,
@@ -22,6 +23,7 @@ import { clusterApiUrl } from "@solana/web3.js";
 import Image from "next/image";
 import { EyeOff, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useWalletStore } from "@/store/walletStore";
 
 export default function Connect() {
   const wallets = useMemo(
@@ -40,19 +42,58 @@ export default function Connect() {
     []
   );
 
+  const setWalletConnected = useWalletStore(
+    (state) => state.setWalletConnected
+  );
+  const setPublicKey = useWalletStore((state) => state.setPublicKey);
+
   const endpoint = useMemo(() => clusterApiUrl("mainnet-beta"), []);
 
   const WalletConnect: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [showAll, setShowAll] = useState(false);
     const [hoveredWallet, setHoveredWallet] = useState<string | null>(null);
-    const { select, publicKey, disconnect } = useWallet();
+    const { select, publicKey, disconnect, connected, signMessage } =
+      useWallet();
 
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
     const toggleShowAll = () => setShowAll(!showAll);
 
     const displayedWallets = showAll ? wallets : wallets.slice(0, 4);
+
+    const signUserMessage = async () => {
+      if (!signMessage) {
+        console.log("Wallet does not support message signing");
+        return;
+      }
+
+      try {
+        const message = Buffer.from("A Message");
+        const signedMessage = await signMessage(message);
+
+        const signedMessageBase64 =
+          Buffer.from(signedMessage).toString("base64");
+
+        console.log("Signed message:", signedMessageBase64);
+      } catch (err) {
+        console.error("Error signing message:", err);
+      }
+    };
+
+    useEffect(() => {
+      if (connected) {
+        setPublicKey(publicKey?.toBase58() as string);
+        setWalletConnected(true);
+      }
+    }, [connected]);
+
+    useEffect(() => {
+      if (!connected) {
+        setPublicKey("");
+        setWalletConnected(false);
+      }
+    }, [connected]);
 
     return (
       <div className="">
@@ -83,7 +124,9 @@ export default function Connect() {
           <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-lg">
             <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold text-black">Connect Wallet</h2>
+                <h2 className="text-xl font-semibold text-black">
+                  Connect Wallet
+                </h2>
                 <button
                   onClick={closeModal}
                   className="text-gray-500 hover:text-gray-700 text-2xl"
@@ -96,7 +139,10 @@ export default function Connect() {
                 {displayedWallets.map((wallet) => (
                   <motion.button
                     key={wallet.name}
-                    onClick={() => select(wallet.name)}
+                    onClick={async () => {
+                      select(wallet.name);
+                      signUserMessage();
+                    }}
                     className={`flex flex-col items-center truncate justify-center p-2 rounded-lg ${
                       wallet.readyState !== "Installed"
                         ? "opacity-50 cursor-not-allowed"

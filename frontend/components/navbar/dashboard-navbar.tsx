@@ -10,6 +10,7 @@ import LightDropdown from "../dropdown/light-dropdown";
 import { useWalletStore } from "@/store/walletStore";
 import { Upload, Image as LucideImage } from "lucide-react";
 import { profileData } from "@/utils/testData";
+import Connect from "../buttons/wallet";
 
 interface ProfileData {
   websiteUrl: string;
@@ -26,11 +27,14 @@ export default function Navbar(): JSX.Element {
   const [pfp, setPfp] = useState<File | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const userPublicKey = useWalletStore((state) => state.publicKey);
 
   const walletConnected = useWalletStore((state) => state.walletConnected);
+  const signedIn = useWalletStore((state) => state.isSignedIn);
   const setWalletConnected = useWalletStore(
     (state) => state.setWalletConnected
   );
+  const setSignedIn = useWalletStore((state) => state.setIsSignedIn);
 
   const handleCreateKeypair = (): void => {
     const newKeypair = Keypair.generate();
@@ -77,10 +81,18 @@ export default function Navbar(): JSX.Element {
       toast.success("Profile created successfully!");
       setWalletConnected(true);
       setIsModalOpen(false);
+      setSignedIn(true);
     } catch (error) {
       console.error("Error creating profile:", error);
       toast.error("Failed to create profile. Please try again.");
     }
+  };
+
+  const handleOpenCreateProfileModal = () => {
+    if (!walletConnected) {
+      return toast.error("Please connect your wallet!");
+    }
+    setIsModalOpen(true);
   };
 
   return (
@@ -98,20 +110,21 @@ export default function Navbar(): JSX.Element {
           className="lg:hidden"
         />
 
-        {walletConnected ? (
+        {walletConnected && signedIn ? (
           <div className="flex items-center space-x-2">
             <Dropdown />
             <SearchInput />
             <LightDropdown
-              title={profileData.title}
+              title={userPublicKey.slice(0, 15)}
               options={profileData.options}
-            />{" "}
+            />
           </div>
         ) : (
-          <div>
+          <div className="flex flex-row">
+            <Connect />
             <button
               className="flex items-center gap-2 bg-black text-white p-2 rounded-lg hover:scale-95 transition-all"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => handleOpenCreateProfileModal()}
             >
               <Image
                 src="/dashboard/wallet-icon.svg"

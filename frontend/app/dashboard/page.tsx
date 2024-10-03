@@ -8,6 +8,7 @@ import Sidebar from "@/components/navbar/sidebar";
 
 export default function Dashboard() {
   const walletConnected = useWalletStore((state: any) => state.walletConnected);
+  const signedIn = useWalletStore((state) => state.isSignedIn);
 
   return (
     <div className="flex flex-row bg-gray-100 h-screen">
@@ -15,7 +16,7 @@ export default function Dashboard() {
       <div className="flex flex-col w-screen">
         <Navbar />
         <div className="p-5 flex flex-1 flex-col">
-          {walletConnected ? (
+          {walletConnected && signedIn ? (
             <DashboardMainConnected />
           ) : (
             <DashboardMainNotConnected />
