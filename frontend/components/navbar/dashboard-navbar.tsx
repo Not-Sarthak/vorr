@@ -120,8 +120,10 @@ export default function Navbar(): JSX.Element {
             />
           </div>
         ) : (
-          <div className="flex flex-row">
-            <Connect />
+          <div className="flex flex-row items-center gap-4">
+            <div className="flex items-center">
+              <Connect />
+            </div>
             <button
               className="flex items-center gap-2 bg-black text-white p-2 rounded-lg hover:scale-95 transition-all"
               onClick={() => handleOpenCreateProfileModal()}
@@ -132,7 +134,7 @@ export default function Navbar(): JSX.Element {
                 width={20}
                 height={20}
               />
-              <span className="hidden sm:inline">Create Profile</span>
+              <span>Create Profile</span>
             </button>
           </div>
         )}

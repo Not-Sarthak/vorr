@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { How } from "@/components/sections/how";
 import { AboutDesktop } from "@/components/sections/about-desktop";
+import { Footer } from "@/components/footer/footer";
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
       <div id="how">
         <How />
       </div>
+      <Footer />
     </div>
   );
 }
