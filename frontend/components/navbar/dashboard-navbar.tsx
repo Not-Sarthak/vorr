@@ -125,7 +125,7 @@ export default function Navbar(): JSX.Element {
               <Connect />
             </div>
             <button
-              className="flex items-center gap-2 bg-black text-white p-2 rounded-lg hover:scale-95 transition-all"
+              className="flex items-center gap-2 bg-black text-white rounded-lg hover:scale-95 transition-all px-4 py-2 h-10"
               onClick={() => handleOpenCreateProfileModal()}
             >
               <Image
@@ -136,6 +136,7 @@ export default function Navbar(): JSX.Element {
               />
               <span>Create Profile</span>
             </button>
+            </div>
           </div>
         )}
       </div>

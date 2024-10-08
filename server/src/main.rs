@@ -2228,7 +2228,6 @@ async fn ping_check_system(shared_state: &Arc<RwLock<AppState>>) {
             }));
         }
 
-        // remove any sockets where ping failed
         for handle in handles {
             match handle.await {
                 Ok(Some(who)) => {
