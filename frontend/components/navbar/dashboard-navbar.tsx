@@ -137,7 +137,6 @@ export default function Navbar(): JSX.Element {
               <span>Create Profile</span>
             </button>
             </div>
-          </div>
         )}
       </div>
 
