@@ -6,12 +6,21 @@ import Navbar from "@/components/navbar/dashboard-navbar";
 import Sidebar from "@/components/navbar/sidebar";
 import OreBalanceCard from "@/components/cards/ore-balance-card";
 import DashboardMainNotConnected from '@/components/dashboard/dashboard-not-connected';
+import TransactionHistoryTable from '@/components/charts/transaction-history';
 
 const PayoutsConnected: React.FC = () => {
+
+  const transactions = [
+    { id: '1', date: '2023-05-01', type: 'Deposit', amount: 100.00, status: 'Completed' },
+    { id: '2', date: '2023-05-02', type: 'Withdrawal', amount: 50.00, status: 'Pending' },
+  ];
+
   return (
     <div className="flex flex-col w-full justify-start p-5">
       <OreBalanceCard balance={100} />
       {/* Add more payout-related components here */}
+      <h1 className="text-2xl my-4 mt-10 font-instrument">Transaction History</h1>
+      <TransactionHistoryTable transactions={transactions} />
     </div>
   );
 };

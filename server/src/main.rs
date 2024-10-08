@@ -559,7 +559,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 challenge: proof.challenge.to_vec(),
                 rewards_earned: None,
             };
-            let result = app_database.add_new_challenge(new_challenge).await;
+            let result: Result<(), AppDatabaseError> = app_database.add_new_challenge(new_challenge).await;
 
             if result.is_err() {
                 panic!("Failed to create challenge in database");

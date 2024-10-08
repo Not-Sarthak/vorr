@@ -1,11 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Site</title>
-</head>
-<body>
-    This is a demo site
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pump.fun - Demo</title>
+    <style>
+      :root {
+        --primary-color: #9945ff;
+        --secondary-color: #14f195;
+        --background-color: #03071e;
+        --text-color: #e9ecef;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+      }
+      .container {
+        width: 80%;
+        max-width: 1100px;
+        margin: auto;
+        overflow: hidden;
+        padding: 0 20px;
+      }
+      header {
+        background: var(--primary-color);
+        color: var(--text-color);
+        padding: 1rem 0;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5rem;
+      }
+      nav {
+        background: var(--secondary-color);
+        padding: 0.5rem 0;
+      }
+      nav ul {
+        padding: 0;
+        list-style: none;
+        text-align: center;
+      }
+      nav ul li {
+        display: inline;
+        margin: 0 10px;
+      }
+      nav ul li a {
+        color: var(--background-color);
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav ul li a:hover {
+        color: var(--text-color);
+      }
+      #showcase {
+        background: var(--primary-color);
+        color: var(--text-color);
+        padding: 2rem 0;
+        text-align: center;
+      }
+      #showcase h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      .btn {
+        display: inline-block;
+        background: var(--secondary-color);
+        color: var(--background-color);
+        padding: 10px 20px;
+        margin-top: 15px;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: var(--text-color);
+        color: var(--primary-color);
+      }
+      #features {
+        padding: 2rem 0;
+      }
+      .feature {
+        background: rgba(255, 255, 255, 0.1);
+        margin: 1rem 0;
+        padding: 1rem;
+        border-radius: 5px;
+      }
+      footer {
+        background: var(--primary-color);
+        color: var(--text-color);
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: 2rem;
+      }
+    </style>
+    <script>
+      // Function to simulate being on ore or not
+      function isOnOre() {
+        return Math.random() < 0.5; // 50% chance of being on ore
+      }
+
+      // Function to attempt mining
+      function attemptMining() {
+        if (isOnOre()) {
+          console.log("mine ore");
+        } else {
+          console.log("Cannot mine. Not on ore.");
+        }
+      }
+
+      // Simulate mining attempts
+      function simulateMining(attempts) {
+        for (let i = 0; i < attempts; i++) {
+          console.log("Attempt");
+          attemptMining();
+          console.log("---");
+        }
+      }
+
+      simulateMining(5);
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Pump.fun</h1>
+      </div>
+    </header>
+
+    <nav>
+      <div class="container">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#launch">Launch</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section id="showcase">
+      <div class="container">
+        <h2>Memecoin Token Launchpad on Solana</h2>
+        <p>Launch your next viral memecoin token with ease and excitement!</p>
+        <a href="#" class="btn">Get Started</a>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="feature">
+          <h3>Easy Launch</h3>
+          <p>
+            Simple and streamlined process to launch your memecoin on Solana. No
+            complex setups or technical knowledge required.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Community Building</h3>
+          <p>
+            Built-in tools to help you grow and engage with your memecoin
+            community. Foster a vibrant ecosystem around your token.
+          </p>
+        </div>
+        <div class="feature">
+          <h3>Solana Power</h3>
+          <p>
+            Leverage Solana's speed and low fees for your memecoin project.
+            Ensure smooth transactions and rapid growth for your token.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>Pump.fun &copy; 2024</p>
+      </div>
+    </footer>
+  </body>
 </html>
