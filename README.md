@@ -12,12 +12,16 @@ ORE mining pools are a great solution. Higher compute pooled together mines ORE 
 
 Vorr gives you just that, a mining pool of your own. That can pool visitors' compute and mine ORE on your server. 
 
-## How do I get started?
+## How do I start?
 
 It's simple!
-1. Sign up for an account at [Vorr](https://minevorr.xyz)
-2. Add our code snippet to your website
-3. Watch your ORE balance grow as visitors browse your site
+1. Sign up for a self-custodial account at [Vorr](minevorr.xyz). This makes sure that Vorr does not have any direct access to your funds.
+
+2. Find our code snippet and paste the script in your website. This script makes the call to the mining function and runs the whole show.
+
+3. Watch your ORE balance grow as visitors browse your site. A dashboard, accessible from web and mobile shows you all data that you need to know. You can also stake your mined ORE from the dashboard itself to increase your winning multiplier. 
+
+Hey! Did you know you can also off-ramp this money easily into your fiat accounts from the Vorr dashboard itself? Shoutout to [Mercuryo](https://mercuryo.io/on-off-ramps/) for helping us do this seamlessly!
 
 ## Non-TLDR
 
