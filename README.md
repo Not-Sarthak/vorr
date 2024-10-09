@@ -25,7 +25,7 @@ Hey! Did you know you can also off-ramp this money easily into your fiat account
 
 ## Non-TLDR
 
-While the solution seems fairly simple, Vorr has a complex architecture. It includes running a custom [DrillX](https://crates.io/crates/drillx) algorithm, co-ordinating nonces between visitors and time cut-offs from a central server. It has plenty parts intertwined making sure the product runs beautifully. 
+While the solution seems fairly simple, Vorr has a complex architecture. It includes running [DrillX](https://crates.io/crates/drillx) algorithm, co-ordinating nonces between visitors and time cut-offs from a central server. It has plenty parts intertwined making sure the product runs beautifully. 
 
 There's a twist.
 
