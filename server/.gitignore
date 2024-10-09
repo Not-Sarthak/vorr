@@ -3,3 +3,4 @@ wallet.json
 target
 logs
 whitelist.txt
+node_modules
